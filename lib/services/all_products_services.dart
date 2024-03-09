@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:store_app_tr2/helper/api.dart';
 import 'package:store_app_tr2/models/products_modle.dart';
 
 class AllProductsServices {
@@ -6,8 +7,9 @@ class AllProductsServices {
 
   AllProductsServices({required this.dio});
   Future<List<ProductsModel>> getAllProducts() async {
-    Response response = await dio.get("https://fakestoreapi.com/products");
-    List<dynamic> data = response.data;
+    List<dynamic> data =
+        await Api(dio: Dio()).get(url: "https://fakestoreapi.com/products");
+
     List<ProductsModel> allProductsList = [];
     for (var i = 0; i < data.length; i++) {
       allProductsList.add(

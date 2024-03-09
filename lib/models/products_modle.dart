@@ -1,7 +1,7 @@
 class ProductsModel {
-  final String id;
+  final int id;
   final String title;
-  final String price;
+  final num price;
   final String description;
   final String category;
   final String image;
@@ -31,8 +31,8 @@ class ProductsModel {
 }
 
 class RatingModel {
-  final String rate;
-  final String count;
+  final num rate;
+  final num count;
 
   RatingModel({required this.rate, required this.count});
   factory RatingModel.formjson(json) {
