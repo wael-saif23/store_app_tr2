@@ -5,8 +5,12 @@ class Api {
   final Dio dio;
 
   Api({required this.dio});
-  Future<dynamic> get({required String url}) async {
-    Response response = await dio.get(url);
+  Future<dynamic> get({required String url, String? token}) async {
+    Map<String, dynamic> headers = {};
+    if (token != null) {
+      headers.addAll({'Authorization': 'Bearar $token'});
+    }
+    Response response = await dio.get(url, options: Options(headers: headers));
     if (response.statusCode == 200) {
       return response.data;
     } else {
@@ -18,7 +22,7 @@ class Api {
   Future<dynamic> post(
       {required String url,
       @required dynamic data,
-      @required String? token}) async {
+       String? token}) async {
     Map<String, dynamic> headers = {};
     if (token != null) {
       headers.addAll({'Authorization': 'Bearar $token'});
@@ -38,7 +42,7 @@ class Api {
   Future<dynamic>put(
       {required String url,
       @required dynamic data,
-      @required String? token}) async {
+       String? token}) async {
     Map<String, dynamic> headers = {
        'Content-Type': 'application/x-www-form-urlencoded'
     };
