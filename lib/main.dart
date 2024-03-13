@@ -1,6 +1,5 @@
-
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-
 
 void main() {
   runApp(const MyApp());
@@ -58,7 +57,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
+  Dio dio = Dio();
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -118,10 +117,48 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed:_incrementCounter,
+        onPressed:
+            // _incrementCounter
+            () async {
+              var headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Accept': 'application/json',
+};
+          Response response =
+              await dio.post('https://fakestoreapi.com/products', data: {
+            'title': 'test product',
+            'price': '13.5',
+            'description': 'lorem ipsum set',
+            'image': 'https://i.pravatar.cc',
+            'category': 'electronic',
+          },options: Options(
+            headers: headers
+          ));
+          print(response.data);
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
+
+
+// Future<Response> postDataWithHeaders(String url, Map<String, dynamic> data) async {
+//   final Dio dio = Dio();
+//   final Map<String, String> headers = {
+//     'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // Replace with your actual token
+//     'Content-Type': 'application/json', // Or other content type if needed
+//   };
+
+//   final options = Options(headers: headers);
+
+//   try {
+//     final response = await dio.post(url, data: data, options: options);
+//     return response;
+//   } on DioException catch (e) {
+//     // Handle errors here
+//     print(e.error);
+//     rethrow; // Or throw a custom exception
+//   }
+// }
