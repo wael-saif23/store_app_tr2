@@ -18,8 +18,21 @@ class HomePage extends StatelessWidget {
               onPressed: () {}, icon: const Icon(FontAwesomeIcons.cartPlus))
         ],
       ),
-      body: Center(
-        child: CustomProductCard(),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 50,bottom: 8,left: 8,right: 8),
+        child: GridView.builder(
+          clipBehavior: Clip.none,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 1.6,
+            mainAxisSpacing: 70,
+            crossAxisSpacing: 10,
+          ),
+         
+          itemBuilder: (BuildContext context, int index) {
+            return const CustomProductCard() ;
+          },
+        ),
       ),
     );
   }

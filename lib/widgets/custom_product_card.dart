@@ -18,8 +18,7 @@ class CustomProductCard extends StatelessWidget {
               blurRadius: 10
             )]
           ),
-          height: 130,
-          width: 200,
+      
           child: Card(
             elevation: 0,
             child: Padding(
@@ -51,10 +50,10 @@ class CustomProductCard extends StatelessWidget {
           ),
         ),
      Positioned(
-      top: -60,
+      top: -50,
       right: 20,
        child: SizedBox(
-        width: 80,
+        width: 70,
         child: Image.network("https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg")),
      )
       ],
