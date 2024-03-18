@@ -38,7 +38,9 @@ class HomePage extends StatelessWidget {
                   crossAxisSpacing: 10,
                 ),
                 itemBuilder: (BuildContext context, int index) {
-                  return  CustomProductCard(product:products[index] ,);
+                  return CustomProductCard(
+                    product: products[index],
+                  );
                 },
               );
             } else {

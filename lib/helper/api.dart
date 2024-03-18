@@ -20,9 +20,7 @@ class Api {
   }
 
   Future<dynamic> post(
-      {required String url,
-      @required dynamic data,
-       String? token}) async {
+      {required String url, @required dynamic data, String? token}) async {
     Map<String, dynamic> headers = {};
     if (token != null) {
       headers.addAll({'Authorization': 'Bearar $token'});
@@ -39,27 +37,24 @@ class Api {
     }
   }
 
-  Future<dynamic>put(
-      {required String url,
-      @required dynamic data,
-       String? token}) async {
+  Future<dynamic> put(
+      {required String url, @required dynamic data, String? token}) async {
     Map<String, dynamic> headers = {
-       'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/x-www-form-urlencoded'
     };
     if (token != null) {
       headers.addAll({'Authorization': 'Bearar $token'});
     }
-
+    print('url = $url & data = $data & token = $token');
     Response response =
-        await dio.post(url, data: data, options: Options(headers: headers));
+        await dio.put(url, data: data, options: Options(headers: headers));
     if (response.data == 200) {
       Map<String, dynamic> data = response.data;
+      print('data = $data');
       return data;
     } else {
       throw Exception(
           'There is a problem with status code ${response.statusMessage}with body ${response.data}');
     }
   }
-
-
 }
